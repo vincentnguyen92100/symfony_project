@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -20,6 +21,7 @@ class Users
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (min="5")
      */
     private $username;
 
@@ -30,8 +32,15 @@ class Users
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (min="8", minMessage="Your must have 8 caracter minimum")
      */
     private $password;
+
+    /**
+     * @Assert\EqualTo(propertyPath="password", message= "Your password confirmation should be similar of your password")
+     */
+    
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="boolean")
