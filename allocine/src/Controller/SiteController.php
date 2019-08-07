@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Users;
 
 class SiteController extends AbstractController
 {
@@ -29,7 +30,22 @@ class SiteController extends AbstractController
      */
     public function register()
     {
-        return $this->render('site/register.html.twig');
+       $user = new Users();
+
+       $form = $this->createFormBuilder($user)
+             ->add('username')
+               ->add('email')
+              ->add('password')
+               ->getForm();
+               
+        $user->setUnsubscribe(false);
+        $user->setBanned(false);
+        $user->setAdmin(false);
+        return $this->render('site/register.html.twig', [
+        'formUsers' => $form->createView()
+        ]);
+
+        //return $this->render('site/register.html.twig');
     }
 
     /**
