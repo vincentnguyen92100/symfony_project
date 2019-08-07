@@ -3,14 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Users
+class Users implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -27,6 +28,7 @@ class Users
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\email()
      */
     private $email;
 
@@ -133,4 +135,12 @@ class Users
 
         return $this;
     }
+
+    public function eraseCredentials(){}
+
+        public function getSalt(){}
+
+            public function getRoles(){
+                return ['ROLE_USER'];
+            }
 }
