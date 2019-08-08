@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\Users:
-            algorithm: bcrypt
+            algorithm: auto
 
 
            

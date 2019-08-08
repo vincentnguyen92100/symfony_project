@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Regions
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for monMovie in Movies %}
+            {% for result in monMovie %}
+            
+                <div class="col-md-3">
+                    <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-header">{{ result.title }}</div>
+                        <div class="card-body">
+                            <img width="200" src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}">
+                            <p class="card-text">{{ result.overview }}</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

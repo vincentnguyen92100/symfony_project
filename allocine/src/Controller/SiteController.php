@@ -38,9 +38,6 @@ class SiteController extends AbstractController
               ->add('password')
                ->getForm();
                
-        $user->setUnsubscribe(false);
-        $user->setBanned(false);
-        $user->setAdmin(false);
         return $this->render('site/register.html.twig', [
         'formUsers' => $form->createView()
         ]);
