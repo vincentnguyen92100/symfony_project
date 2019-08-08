@@ -13,7 +13,7 @@ class ApiMovieController extends AbstractController
      */
     public function popularMovies(SerializerInterface $serializer)
     {
-        $Movies=file_get_contents('https://api.themoviedb.org/3/movie/popular?api_key=f5621d217c7c61f28b699c88eade6ebf&language=en-US&page=1');
+        $Movies=file_get_contents('https://api.themoviedb.org/3/movie/popular?api_key=f5621d217c7c61f28b699c88eade6ebf&language=en-US&page=10');
         $MoviesTab=$serializer->decode($Movies, 'json');
 
         $category=file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=fe9e318b04bec15f80e7ddf05a462e39');

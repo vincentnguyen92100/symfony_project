@@ -7,11 +7,12 @@
             {% block title %}Welcome!
             {% endblock %}
         </title>
-        <link href="https://bootswatch.com/4/lux/bootstrap.min.css" rel="stylesheet"> {% block stylesheets %}{% endblock %}
+        <link href="/style.css" rel="stylesheet">
+        <link href="https://bootswatch.com/4/lux/bootstrap.min.css" rel="stylesheet" > {% block stylesheets %}{% endblock %}
         </head>
 
         <body>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="{{ path('movies') }}">ALLO CINE 2</a>
                 <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +39,7 @@
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" placeholder="Search" type="text">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                        <button class="btn btn-primary" type="submit">Search</button>
                     </form>
                 </div>
             </nav>

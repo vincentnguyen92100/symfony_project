@@ -54,7 +54,7 @@ class SiteController extends AbstractController
         return $this->render('site/login.html.twig');
     }
     /**
-     * @Route("/site/movie/12", name="site_moviedetails")
+     * @Route("/site/movie/", name="site_moviedetails")
      */
     public function show(){
         return $this->render('site/moviedetails.html.twig');
