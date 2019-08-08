@@ -7,9 +7,13 @@
 
     <div class="row">
   <div class="col-2"><div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active">Popular Movies</a>
-  <a href="#" class="list-group-item list-group-item-action">Sci Fiction</a>
-  <a href="#" class="list-group-item list-group-item-action disabled">Action</a>
+
+            {% for myName in genres %}
+            {% for element in myName %}
+              <a href="#" class="list-group-item list-group-item-action">{{ element.name }}  </a>
+            
+            {% endfor %}
+            {% endfor %}
 </div></div>
   <div class="col-10">
 Popular Movies
