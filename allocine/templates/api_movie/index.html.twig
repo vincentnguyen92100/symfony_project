@@ -1,27 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Regions
-{% endblock %}
+{% block title %}Popular Movies{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
+
+
+    <div class="row">
+  <div class="col-2"><div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">Popular Movies</a>
+  <a href="#" class="list-group-item list-group-item-action">Sci Fiction</a>
+  <a href="#" class="list-group-item list-group-item-action disabled">Action</a>
+</div></div>
+  <div class="col-10">
+Popular Movies
+
+          <div class="row">
             {% for monMovie in Movies %}
             {% for result in monMovie %}
             
                 <div class="col-md-3">
-                    <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">{{ result.title }}</div>
-                        <div class="card-body">
-                            <img width="200" src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}">
-                            <p class="card-text">{{ result.overview }}</p>
-                        </div>
+                
+                    <div class="card text-white mb-3" style="max-width: 20rem;border:0px">
+                    <img width="200" class="overlay" src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}">
+
+
+                        {# <div class="card-header">{{ result.title }}</div> #}
+                        {# <div class="card-body"> #}
+                            {# <img width="200" src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}"> #}
+                            {# <p class="card-text">{{ result.overview }}</p> #}
+                        {# </div> #}
                         
                     </div>
                 </div>
             {% endfor %}
             {% endfor %}
         </div>
-    </div>
+        </div>
+</div>
+
+
+
+
+
+
 
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\ApiMoviesController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Users;
 
