@@ -1,52 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Popular Movies{% endblock %}
+{% block title %}Popular Movies
+{% endblock %}
 
 {% block body %}
 
 
-<div class="row">
-  <div class="col-2"><div class="list-group">
-            {% for myName in genres %}
-            {% for element in myName %}
-            <a href="https://api.themoviedb.org/3/list/{{ element.id }}?language=en-US&api_key=f5621d217c7c61f28b699c88eade6ebf" class="list-group-item list-group-item-action">{{ element.name }}  </a>
-            {% endfor %}
-            {% endfor %}
-        </div></div>
-          <div class="col-10">
-        <h1>Popular Movies</h1>
-        <hr>
-          <div class="row">
-            {% for monMovie in Movies %}
-            {% for result in monMovie %}
-                <div class="col-md-3">
-               <div class="cont">
-                    <div class="card text-black mb-3" style="max-width: 20rem;border:0px">
-                    <a class="image" href="{{ path('site_moviedetails') }}?id={{ result.id }}"><img width="200" class="shadow"  src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}"></a>
-                    {# <div>{{ result.title }}</div> #}
+    <div class="row">
+        <div class="col-2">
+            <div class="list-group">
+                {% for myName in genres %}
+                    {% for element in myName %}
+                        <a href="{{ path('movies_details', { 'id': element.id }) }}" class="list-group-item list-group-item-action">{{ element.name }}
+                        </a>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-10">
+            <h1>Popular Movies</h1>
+            <hr>
+            <div class="row">
+                {% for monMovie in Movies %}
+                    {% for result in monMovie %}
+                        <div class="col-md-3">
+                            <div class="cont">
+                                <div class="card text-black mb-3" style="max-width: 20rem;border:0px">
+                                    <a class="image" href="{{ path('movies_details', { 'id': result.id }) }}"><img class="shadow" src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}" width="200"></a>
+                                    {# <div>{{ result.title }}</div> #}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div aria-label="Toolbar with button groups" class="btn-toolbar" role="toolbar">
+                    <div aria-label="First group" class="btn-group mr-2" role="group">
+                        <button class="btn btn-secondary" type="button">1</button>
+                        <button class="btn btn-secondary" type="button">2</button>
+                        <button class="btn btn-secondary" type="button">3</button>
+                        <button class="btn btn-secondary" type="button">4</button>
                     </div>
+                    <div aria-label="Second group" class="btn-group mr-2" role="group">
+                        <button class="btn btn-secondary" type="button">5</button>
+                        <button class="btn btn-secondary" type="button">6</button>
+                        <button class="btn btn-secondary" type="button">7</button>
+                    </div>
+                    <div aria-label="Third group" class="btn-group" role="group">
+                        <button class="btn btn-secondary" type="button">8</button>
                     </div>
                 </div>
-            {% endfor %}
-            {% endfor %}
-     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group mr-2" role="group" aria-label="First group">
-        <button type="button" class="btn btn-secondary">1</button>
-        <button type="button" class="btn btn-secondary">2</button>
-        <button type="button" class="btn btn-secondary">3</button>
-        <button type="button" class="btn btn-secondary">4</button>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <button type="button" class="btn btn-secondary">5</button>
-        <button type="button" class="btn btn-secondary">6</button>
-        <button type="button" class="btn btn-secondary">7</button>
-      </div>
-      <div class="btn-group" role="group" aria-label="Third group">
-        <button type="button" class="btn btn-secondary">8</button>
-      </div>
+            </div>
+        </div>
     </div>
-        </div>
-        </div>
-</div>
 
 {% endblock %}
