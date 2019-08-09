@@ -52,4 +52,28 @@ class ApiMovieController extends AbstractController
     }
 
 
+    /**
+     * @Route("/categorie/{id}", name="categories")
+     */
+    public function cotegoriesMovies(SerializerInterface $serializer, $id)
+    {
+        $categorieMovies=file_get_contents('https://api.themoviedb.org/3/list/'.$id.'?api_key=fe9e318b04bec15f80e7ddf05a462e39&page=2');
+        $categorieTab=$serializer->decode($categorieMovies, 'json');
+
+        $category=file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=fe9e318b04bec15f80e7ddf05a462e39');
+        $categoryTab=$serializer->decode($category, 'json');
+
+         dump($categorieTab);
+         die();
+        //dump($MoviesTab);
+        //$MoviesObjets=$serializer->denormalize($MoviesTab, 'App\Entity\Region[]')
+        //die();
+        return $this->render('api_movie/categories.html.twig', [
+            'categorieMovies'=> $categorieTab, 'genres'=> $categoryTab
+        ]);
+        // dump($categoryTab);
+        // die();
+    }
+
+
 }

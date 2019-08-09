@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Liste;
 use App\Entity\Users;
 use App\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,16 +20,17 @@ class SecurityController extends AbstractController
         $user = new Users();
 
         $form = $this->createForm(registrationType::class, $user);
-
         $form->handleRequest($request);
 
         $user->setUnsubscribe(false);
         $user->setBanned(false);
         $user->setAdmin(false);
 
+        
+        //$Liste->setName('favorite');
+        //$Liste->setUsers($user->username);
 
-
-
+ 
         if($form->isSubmitted() && $form->isValid())
         {
             $hash = $encoder->encodePassword($user, $user->getPassword());
@@ -36,6 +38,21 @@ class SecurityController extends AbstractController
             
             $manager->persist($user);
             $manager->flush();
+          //  dump($user);
+            //die();
+            $id=$user->getId();
+           
+
+            $Liste = new Liste();
+            dump($id);
+            die();
+            $Liste->setName("Favourite")
+                 ->setDescription("test")
+                 ->setUsers($id);
+    
+            $manager->persist($Liste);
+            
+          
             return $this->redirectToRoute('security_login');
         }
         return $this->render('security/registration.html.twig', [

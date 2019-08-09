@@ -9,12 +9,14 @@
     <div class="row">
         <div class="col-2">
             <div class="list-group">
-                {% for myName in genres %}
+            
+                {% for myName in categorieMovies %}
                     {% for element in myName %}
                         <a href="{{ path('categories', { 'id': element.id }) }}" class="list-group-item list-group-item-action">{{ element.name }}
                         </a>
                     {% endfor %}
                 {% endfor %}
+                
             </div>
         </div>
         <div class="col-10">
@@ -26,7 +28,7 @@
                         <div class="col-md-3">
                             <div class="cont">
                                 <div class="card text-black mb-3" style="max-width: 20rem;border:0px">
-                                    <a class="image" href="{{ path('movies_details', { 'id': result.id }) }}"><img class="shadow" src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}" width="200"></a>
+                                    <a class="image" href="{{ path('categories', { 'id': result.id }) }}"><img class="shadow" src="https://image.tmdb.org/t/p/w500/{{ result.poster_path }}" width="200"></a>
                                     {# <div>{{ result.title }}</div> #}
                                 </div>
                             </div>
