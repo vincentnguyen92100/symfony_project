@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Liste;
 use App\Entity\Users;
 use App\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class SecurityController extends AbstractController
 {
@@ -19,16 +19,13 @@ class SecurityController extends AbstractController
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
         $user = new Users();
 
-        $form = $this->createForm(registrationType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         $user->setUnsubscribe(false);
         $user->setBanned(false);
         $user->setAdmin(false);
 
-        
-        //$Liste->setName('favorite');
-        //$Liste->setUsers($user->username);
 
  
         if($form->isSubmitted() && $form->isValid())
@@ -38,20 +35,6 @@ class SecurityController extends AbstractController
             
             $manager->persist($user);
             $manager->flush();
-          //  dump($user);
-            //die();
-            $id=$user->getId();
-           
-
-            $Liste = new Liste();
-            dump($id);
-            die();
-            $Liste->setName("Favourite")
-                 ->setDescription("test")
-                 ->setUsers($id);
-    
-            $manager->persist($Liste);
-            
           
             return $this->redirectToRoute('security_login');
         }

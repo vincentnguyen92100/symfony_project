@@ -20,16 +20,11 @@ class ApiMovieController extends AbstractController
         $categoryTab=$serializer->decode($category, 'json');
 
 
-        // dump($categoryTab);
-        // die();
-        //dump($MoviesTab);
-        //$MoviesObjets=$serializer->denormalize($MoviesTab, 'App\Entity\Region[]')
-        //die();
+        
         return $this->render('api_movie/index.html.twig', [
             'Movies'=> $MoviesTab,'genres'=> $categoryTab
         ]);
-        // dump($categoryTab);
-        // die();
+     
     }
 
     /**
@@ -42,9 +37,7 @@ class ApiMovieController extends AbstractController
 
         $trailerDetails=file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'/videos?language=en-US&api_key=f5621d217c7c61f28b699c88eade6ebf');
         $trailer=$serializer->decode($trailerDetails, 'json');
-        //dump($threaler);
-        //die();
-        //$details = $moviesDetails->find($id);
+       
         return $this->render('api_movie/details.html.twig', [
         'details'=> $MoviesTab, 'trailer'=> $trailer
         ]);
@@ -53,26 +46,22 @@ class ApiMovieController extends AbstractController
 
 
     /**
-     * @Route("/categorie/{id}", name="categories")
+     * @Route("/categories/{id}", name="categories")
      */
-    public function cotegoriesMovies(SerializerInterface $serializer, $id)
+    public function categoriesMovies(SerializerInterface $serializer, $id)
     {
-        $categorieMovies=file_get_contents('https://api.themoviedb.org/3/list/'.$id.'?api_key=fe9e318b04bec15f80e7ddf05a462e39&page=2');
-        $categorieTab=$serializer->decode($categorieMovies, 'json');
+        $Movies=file_get_contents('https://api.themoviedb.org/3/discover/movie?api_key=f5621d217c7c61f28b699c88eade6ebf&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres='.$id);
+        $MoviesTab=$serializer->decode($Movies, 'json');
 
         $category=file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=fe9e318b04bec15f80e7ddf05a462e39');
         $categoryTab=$serializer->decode($category, 'json');
 
-         dump($categorieTab);
-         die();
-        //dump($MoviesTab);
-        //$MoviesObjets=$serializer->denormalize($MoviesTab, 'App\Entity\Region[]')
-        //die();
-        return $this->render('api_movie/categories.html.twig', [
-            'categorieMovies'=> $categorieTab, 'genres'=> $categoryTab
-        ]);
         // dump($categoryTab);
         // die();
+        return $this->render('api_movie/categories.html.twig', [
+            'Movies'=> $MoviesTab, 'genres'=> $categoryTab
+        ]);
+    
     }
 
 

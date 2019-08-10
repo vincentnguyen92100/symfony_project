@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Users;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +29,7 @@ class Liste
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="listes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $users;
 

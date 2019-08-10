@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <h1>Admin Panel</h1>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Banned</th>
+                <th>Unsubscribe</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.admin ? 'Yes' : 'No' }}</td>
+                <td>{{ user.banned ? 'Yes' : 'No' }}</td>
+                <td>{{ user.unsubscribe ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <a class="btn btn-info" href="{{ path('users_new') }}">Create new</a>
+    <br><br>
+    <a class="btn btn-success" href="{{ path('dashboard') }}">back to dasboard</a>
+
+{% endblock %}

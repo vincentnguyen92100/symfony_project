@@ -3,22 +3,34 @@
 {% endblock %}
 {% block body %}
 
-    <section class="articles">
+<h2>{{ details.title }}</h2>
+<hr>
 
-        <article>
-            <h2>{{ details.title }}</h2>
-            <img src="https://image.tmdb.org/t/p/w500/{{ details.poster_path }}"></img>
-        <div class="content">
-            <div class="metadata">Date de sortie :{{ details.release_date }}
+<div class="row">
+        <div class="col-3">
+            <div><img width="250" src="https://image.tmdb.org/t/p/w500/{{ details.poster_path }}"></img>
             </div>
+        </div>
+        <div class="col-9">
+           
             <div>
-                {{ details.overview }}
+<legend>Details</legend>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Release date : </label><div class="col-sm-10">
+      <label for="staticEmail" class="col-sm-2 col-form-label">{{ details.release_date |date("m/d/Y")}}</label></div>
+      <label for="staticEmail" class="col-sm-2 col-form-label">Average note : </label><div class="col-sm-10">
+      <label for="staticEmail" class="col-sm-2 col-form-label">{{ details.vote_average }}</label></div>
+      <label for="staticEmail" class="col-sm-2 col-form-label">Popularity : </label><div class="col-sm-10">
+      <label for="staticEmail" class="col-sm-2 col-form-label">{{ details.popularity }}</label></div>
+      <label for="staticEmail" class="col-sm-8 col-form-label">{{ details.overview }}</label>
+      
+    </div>
             </div>
         </div>
-        <div>
-            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0" height="315" src="https://www.youtube.com/embed/{{ trailer.results.0.key }}?autoplay=1?controls=0" width="560"></iframe>
-
-        </div>
-    </article>
-
-</section>{% endblock %}
+    </div>
+<br>
+<center><h3>Official Trailer</h3></center>
+<hr>
+<center><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0" height="315" src="https://www.youtube.com/embed/{{ trailer.results.0.key }}?autoplay=1?controls=0" width="560"></iframe></center>
+<br>
+{% endblock %}
