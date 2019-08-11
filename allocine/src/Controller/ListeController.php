@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Liste;
-use App\Form\ListeType;
 use App\Entity\Users;
+use App\Form\ListeType;
+use App\Repository\ListeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -43,6 +45,17 @@ class ListeController extends AbstractController
 
     }
 
-    
+    /**
+     * @Route("/list/index", name="list_index", methods={"GET"})
+     */
+    public function index(ListeRepository $ListeRepository): Response
+    {
+        $users = $this->getUser();
+        // dump($users);
+        // die();
+        return $this->render('liste/index.html.twig', [
+            'listes' => $ListeRepository->findall($users),
+        ]);
+    }
 
 }
