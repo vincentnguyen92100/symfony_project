@@ -156,7 +156,8 @@ class Users implements UserInterface
      /**
      * @ORM\column(type="json")
      */
-    private $roles=[];   
+    private $roles=[];  
+
     public function getRoles() : array
     {
         $roles = $this->roles;
@@ -172,6 +173,15 @@ class Users implements UserInterface
         return array_unique($roles);
         
     }
+
+    public function setRoles(string $roles) : self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+
 
             /**
              * @return Collection|Liste[]
