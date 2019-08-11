@@ -17,19 +17,27 @@ class SecurityController extends AbstractController
      * @Route("/inscription", name="security_Registration")
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
+        
+        
         $user = new Users();
+        
 
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
-        $user->setUnsubscribe(false);
-        $user->setBanned(false);
-        $user->setAdmin(false);
+        if(!$user->getId()){
+            $user->setUnsubscribe(false);
+            $user->setBanned(false);
+            $user->setAdmin(false);
+        }
+
+       
 
 
  
         if($form->isSubmitted() && $form->isValid())
         {
+            
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             

@@ -98,4 +98,5 @@ class UsersController extends AbstractController
 
         return $this->redirectToRoute('users_index');
     }
+
 }
